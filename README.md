@@ -12,7 +12,7 @@ then hit
 
 ` docker-compose up in root directory`
 
-Then you can use services as `Postman` to hit the `localhost:3000/weather` whith your GET and POST requests
+Then you can use services as `Postman` to hit the `localhost:3000/weather` with your GET and POST requests
 
 This is example of request body that you can send (London)
 
@@ -21,4 +21,4 @@ This is example of request body that you can send (London)
     "lon":"-0.127647"
 }`
 
-and you can add `"part" ` with keywords to it aswell
+and you can add `"part" ` with keywords to it as well
