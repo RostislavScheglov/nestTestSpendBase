@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { WeatherData } from '../dto/weather.dto';
 
 @Entity('Weather')
 export class Weather {
@@ -15,5 +16,5 @@ export class Weather {
   part: string | null;
 
   @Column('json')
-  data: object;
+  data: WeatherData;
 }

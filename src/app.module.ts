@@ -9,7 +9,5 @@ import { ConfigModule } from '@nestjs/config';
     DatabaseModule,
     WeatherModule,
   ],
-  // controllers: [],
-  // providers: [],
 })
 export class AppModule {}

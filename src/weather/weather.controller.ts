@@ -10,16 +10,16 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { WeatherService } from './weather.service';
-import { CreateWeatherDto } from './dto/create-weather.dto';
-import { GetWeatherDto } from './dto/get-weather.dto';
+import { WeatherData, WeatherDto } from './dto/weather.dto';
 
 @Controller('weather')
 export class WeatherController {
   constructor(private readonly weatherService: WeatherService) {}
+
   @Get()
   @UseInterceptors(ClassSerializerInterceptor)
-  async find(@Body() createWeatherDto: CreateWeatherDto) {
-    const data: any = await this.weatherService.createWeather(createWeatherDto);
+  async findWeather(@Body() weatherDto: WeatherDto) {
+    const data = await this.weatherService.getWeather(weatherDto);
     return {
       sunrise: data.current.sunrise,
       sunset: data.current.sunset,
@@ -33,7 +33,7 @@ export class WeatherController {
   }
 
   @Post()
-  async createWeather(@Body() createWeatherDto: CreateWeatherDto) {
-    return this.weatherService.createWeather(createWeatherDto);
+  async createWeather(@Body() weatherDto: WeatherDto) {
+    return this.weatherService.getWeather(weatherDto);
   }
 }

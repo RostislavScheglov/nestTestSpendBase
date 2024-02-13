@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Weather } from './entities/weather.entity';
 import axios from 'axios';
-import { CreateWeatherDto } from './dto/create-weather.dto';
+import { WeatherDto } from './dto/weather.dto';
 
 @Injectable()
 export class WeatherService {
@@ -12,10 +12,10 @@ export class WeatherService {
     private weatherRepository: Repository<Weather>,
   ) {}
 
-  async createWeather(createWeatherDto: CreateWeatherDto) {
+  async getWeather(weatherDto: WeatherDto) {
     try {
-      const { lat, lon } = createWeatherDto;
-      const part = createWeatherDto.part ? createWeatherDto.part : null;
+      const { lat, lon } = weatherDto;
+      const part = weatherDto.part ? weatherDto.part : null;
 
       const weather = await this.weatherRepository.findOne({
         where: { lat, lon, part },
@@ -36,7 +36,6 @@ export class WeatherService {
           },
         },
       );
-
       const newWeather = this.weatherRepository.create({
         lat,
         lon,
@@ -49,7 +48,6 @@ export class WeatherService {
       return newWeather.data;
     } catch (error) {
       console.log(error);
-      return 'Error getting/creating weather data';
     }
   }
 }
